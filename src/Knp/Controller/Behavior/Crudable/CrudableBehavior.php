@@ -3,6 +3,7 @@
 namespace Knp\Controller\Behavior\Crudable;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Util\Inflector;
 
 /**
@@ -269,11 +270,17 @@ trait CrudableBehavior
      */
     protected function getBundleName()
     {
-        foreach ($this->get('kernel')->getBundles() as $bundle) {
-            if (false !== strpos(get_class($this), $bundle->getNamespace())) {
-                return $bundle->getName();
+        if ($this instanceof Controller) {
+            foreach ($this->get('kernel')->getBundles() as $bundle) {
+                if (false !== strpos(get_class($this), $bundle->getNamespace())) {
+                    return $bundle->getName();
+                }
             }
         }
+
+        throw new \RuntimeException(
+            'getBundleName() method should return proper bundle name. Please override it.'
+        );
     }
 
     /**
@@ -283,7 +290,13 @@ trait CrudableBehavior
      */
     protected function getBundleNamespace()
     {
-        return $this->get('kernel')->getBundle($this->getBundleName())->getNamespace();
+        if ($this instanceof Controller) {
+            return $this->get('kernel')->getBundle($this->getBundleName())->getNamespace();
+        }
+
+        throw new \RuntimeException(
+            'getBundleNamespace() method should return proper bundle namespace. Please override it.'
+        );
     }
 
     /**
