@@ -21,7 +21,7 @@ trait FilterableBehavior
      *
      * @return string
      */
-    abstract protected function getEntityName();
+    abstract protected function getObjectName();
 
     /**
      * Creates route for list CRUD action.
@@ -57,12 +57,12 @@ trait FilterableBehavior
 
     private function setFilters(array $filters)
     {
-        $this->get('session')->set(strtolower($this->getEntityName()).'-filters', $filters);
+        $this->get('session')->set(strtolower($this->getObjectName()).'-filters', $filters);
     }
 
     private function getFilters(array $defaults = array())
     {
-        return $this->get('session')->get(strtolower($this->getEntityName()).'-filters', $defaults);
+        return $this->get('session')->get(strtolower($this->getObjectName()).'-filters', $defaults);
     }
 
     /**
@@ -74,7 +74,7 @@ trait FilterableBehavior
     {
         $formClass = sprintf('%s\\Form\\%sFilterType',
             $this->getBundleNamespace(),
-            $this->getEntityName()
+            $this->getObjectName()
         );
 
         return $this->createForm(new $formClass(), $this->getFilters());
