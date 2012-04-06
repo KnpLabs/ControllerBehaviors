@@ -2,7 +2,7 @@
 
 namespace Knp\Controller\Behavior\Crudable\Doctrine;
 
-use Knp\Controller\Behavior\Crudable\Crudable;
+use Knp\Controller\Behavior\Crudable\CrudableBehavior;
 
 trait DoctrineBehavior
 {
