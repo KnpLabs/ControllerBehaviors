@@ -42,7 +42,7 @@ trait CrudableBehavior
     /**
      * Displays specific object.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return Response
      */
@@ -81,7 +81,7 @@ trait CrudableBehavior
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            if ($newObject = $this->saveObject($entity)) {
+            if ($newObject = $this->saveObject($object)) {
                 $object = $newObject;
             }
             $this->getSession()->setFlash('success', $this->getCreateFlashMessage());
@@ -112,7 +112,7 @@ trait CrudableBehavior
     /**
      * Displays specific object edition page.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return Response
      */
@@ -145,7 +145,7 @@ trait CrudableBehavior
     /**
      * Updates specific object.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return Response
      */
@@ -157,7 +157,7 @@ trait CrudableBehavior
 
         $editForm->bindRequest($request);
         if ($editForm->isValid()) {
-            if ($newObject = $this->saveObject($entity)) {
+            if ($newObject = $this->saveObject($object)) {
                 $object = $newObject;
             }
             $this->getSession()->setFlash('success',
@@ -243,7 +243,7 @@ trait CrudableBehavior
     /**
      * Deletes specific object.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return Response
      */
@@ -324,7 +324,7 @@ trait CrudableBehavior
     /**
      * Creates route for list CRUD action.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return string
      */
@@ -336,7 +336,7 @@ trait CrudableBehavior
     /**
      * Creates route for show CRUD action.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return string
      */
@@ -348,7 +348,7 @@ trait CrudableBehavior
     /**
      * Creates route for edit CRUD action.
      *
-     * @param  mixed $object entity instance
+     * @param  mixed $object object instance
      *
      * @return string
      */
@@ -376,7 +376,7 @@ trait CrudableBehavior
      */
     protected function getObjectPublicName($object = null)
     {
-        if (null !== $object && null !== $entity->getId()) {
+        if (null !== $object && null !== $object->getId()) {
             return $this->getObjectName().'#'.$object->getId();
         }
 
