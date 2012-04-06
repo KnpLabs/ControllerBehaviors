@@ -33,7 +33,7 @@ trait DoctrineBehavior
      */
     protected function getObjectRepository($alias = null)
     {
-        return $this->getObjectManager()->getRepository($alias ?: $this->getobjectAlias());
+        return $this->getObjectManager()->getRepository($alias ?: $this->getObjectClass());
     }
 
     /**

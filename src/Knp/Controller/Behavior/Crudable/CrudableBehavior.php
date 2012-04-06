@@ -391,16 +391,6 @@ trait CrudableBehavior
     }
 
     /**
-     * Returns current object alias (BundleName:ObjectName).
-     *
-     * @return string
-     */
-    protected function getObjectAlias()
-    {
-        return $this->getBundleName().':'.$this->getObjectName();
-    }
-
-    /**
      * Extension point to add list view parameters.
      *
      * @param array $parameters
@@ -495,13 +485,23 @@ trait CrudableBehavior
     }
 
     /**
+     * Returns fully qualified class name of the crudable object.
+     *
+     * @return string
+     */
+    protected function getObjectClass()
+    {
+        return sprintf('%s\\%s', $this->getObjectNamespace(), $this->getObjectName());
+    }
+
+    /**
      * Creates new object instance.
      *
      * @return mixed
      */
     protected function createNewObject()
     {
-        $class = sprintf('%s\\%s', $this->getObjectNamespace(), $this->getObjectName());
+        $class = $this->getObjectClass();
 
         return new $class();
     }
