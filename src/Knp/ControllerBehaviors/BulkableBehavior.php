@@ -37,7 +37,7 @@ trait BulkableBehavior
     public function bulkDeleteAction($ids = array())
     {
         $qb = $this
-            ->getEntityRepository()
+            ->getObjectRepository()
             ->createQueryBuilder('e')
             ->delete()
         ;
