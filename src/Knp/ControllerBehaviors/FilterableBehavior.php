@@ -1,6 +1,6 @@
 <?php
 
-namespace Knp\Controller\Behavior;
+namespace Knp\ControllerBehaviors;
 
 use Symfony\Component\HttpFoundation\Request;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Knp\Controller\Behavior;
+namespace Knp\ControllerBehaviors\Paginatable;
 
 use Doctrine\ORM\QueryBuilder;
 
-trait KnpPaginatableBehavior
+trait KnpPaginatorBehavior
 {
     protected function paginateQueryBuilder(QueryBuilder $qb)
     {

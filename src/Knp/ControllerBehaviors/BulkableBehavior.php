@@ -1,13 +1,13 @@
 <?php
 
-namespace Knp\Controller\Behavior;
+namespace Knp\ControllerBehaviors;
 
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Bulk action controller behavior.
  */
-trait BulkBehavior
+trait BulkableBehavior
 {
     public function bulkAction(Request $request)
     {

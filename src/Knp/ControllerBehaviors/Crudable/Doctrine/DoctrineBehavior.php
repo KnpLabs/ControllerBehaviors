@@ -1,8 +1,8 @@
 <?php
 
-namespace Knp\Controller\Behavior\Crudable\Doctrine;
+namespace Knp\ControllerBehaviors\Crudable\Doctrine;
 
-use Knp\Controller\Behavior\Crudable\CrudableBehavior;
+use Knp\ControllerBehaviors\Crudable\CrudableBehavior;
 
 trait DoctrineBehavior
 {

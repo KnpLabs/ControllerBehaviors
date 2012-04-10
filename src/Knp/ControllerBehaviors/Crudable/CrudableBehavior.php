@@ -1,6 +1,6 @@
 <?php
 
-namespace Knp\Controller\Behavior\Crudable;
+namespace Knp\ControllerBehaviors\Crudable;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

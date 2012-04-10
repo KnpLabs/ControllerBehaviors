@@ -1,11 +1,11 @@
 <?php
 
-namespace Knp\Controller\Behavior\Crudable\Doctrine;
+namespace Knp\ControllerBehaviors\Crudable\Doctrine;
 
 /**
- * ORMBehavior.
+ * ODMBehavior.
  */
-trait ORMBehavior
+trait ODMBehavior
 {
     use DoctrineBehavior;
 
@@ -16,7 +16,7 @@ trait ORMBehavior
      */
     protected function getObjectNamespace()
     {
-        return sprintf('%s\\Entity', $this->getBundleNamespace());
+        return sprintf('%s\\Document', $this->getBundleNamespace());
     }
 
     /**
@@ -26,6 +26,6 @@ trait ORMBehavior
      */
     protected function getObjectManager()
     {
-        return $this->getDoctrine()->getEntityManager();
+        return $this->getDoctrine()->getDocumentManager();
     }
 }
