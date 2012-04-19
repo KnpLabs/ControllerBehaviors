@@ -43,9 +43,9 @@ trait FilterableBehavior
 
         if ($form->isValid()) {
             $this->setFilters($form->getData());
-
-            return $this->redirect($this->getListRoute());
         }
+
+        return $this->redirect($this->getListRoute());
     }
 
     public function filterResetAction()
