@@ -3,6 +3,7 @@
 namespace Knp\ControllerBehaviors;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Form;
 
 /**
  * Filtarable controller behavior.
@@ -32,6 +33,8 @@ trait FilterableBehavior
      */
     abstract protected function getListRoute();
 
+    abstract protected function listAction();
+
     /**
      * Displays a form to edit an existing User entity.
      *
@@ -43,9 +46,16 @@ trait FilterableBehavior
 
         if ($form->isValid()) {
             $this->setFilters($form->getData());
+
+            return $this->redirect($this->getListRoute());
         }
 
-        return $this->redirect($this->getListRoute());
+        return $this->getInvalidFilterActionResponse($form);
+    }
+
+    public function getInvalidFilterActionResponse(Form $form)
+    {
+        return $this->listAction();
     }
 
     public function filterResetAction()
