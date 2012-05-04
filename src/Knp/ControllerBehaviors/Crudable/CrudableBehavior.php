@@ -64,10 +64,10 @@ trait CrudableBehavior
         $object = $this->createNewObject();
         $form   = $this->createNewForm($object);
 
-        return $this->render($this->getNewViewPath(), [
+        return $this->render($this->getNewViewPath(), $this->getNewViewParameters([
             $this->getObjectSingular() => $object,
             'form'                     => $form->createView(),
-        ]);
+        ]));
     }
 
     /**
@@ -89,10 +89,10 @@ trait CrudableBehavior
             return $this->redirect($this->getShowRoute($object));
         }
 
-        return $this->render($this->getNewViewPath(), [
+        return $this->render($this->getNewViewPath(), $this->getNewViewParameters([
             $this->getObjectSingular() => $object,
             'form'                     => $form->createView(),
-        ]);
+        ]));
     }
 
     /**
@@ -121,11 +121,11 @@ trait CrudableBehavior
         $editForm   = $this->createEditForm($object);
         $deleteForm = $this->createDeleteForm($object);
 
-        return $this->render($this->getEditViewPath(), [
+        return $this->render($this->getEditViewPath(), $this->getEditViewParameters([
             $this->getObjectSingular() => $object,
             'edit_form'                => $editForm->createView(),
             'delete_form'              => ($deleteForm) ? $deleteForm->createView() : null,
-        ]);
+        ]));
     }
 
     /**
@@ -167,11 +167,11 @@ trait CrudableBehavior
             return $this->redirect($this->getEditRoute($object));
         }
 
-        return $this->render($this->getEditViewPath(), [
+        return $this->render($this->getEditViewPath(), $this->getEditViewParameters([
             $this->getObjectSingular() => $object,
             'edit_form'                => $editForm->createView(),
             'delete_form'              => ($deleteForm) ? $deleteForm->createView() : null,
-        ]);
+        ]));
     }
 
     /**
@@ -411,6 +411,16 @@ trait CrudableBehavior
     protected function getListViewParameters(array $parameters)
     {
         return $parameters;
+    }
+
+    protected function getNewViewParameters(array $parameters)
+    {
+        return $parameters;
+    }
+
+    protected function getEditViewParameters(array $parameters)
+    {
+        return $this->getNewViewParameters($parameters);
     }
 
     /**
