@@ -50,10 +50,10 @@ trait CrudableBehavior
     {
         $deleteForm = $this->createDeleteForm($object);
 
-        return $this->render($this->getShowViewPath(), [
+        return $this->render($this->getShowViewPath(), $this->getShowViewParameters([
             $this->getObjectSingular() => $object,
             'delete_form'              => ($deleteForm) ? $deleteForm->createView() : null,
-        ]);
+        ]));
     }
 
     /**
@@ -409,6 +409,11 @@ trait CrudableBehavior
      * @param array $parameters
      */
     protected function getListViewParameters(array $parameters)
+    {
+        return $parameters;
+    }
+
+    protected function getShowViewParameters(array $parameters)
     {
         return $parameters;
     }
