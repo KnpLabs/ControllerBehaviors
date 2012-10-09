@@ -16,7 +16,7 @@ trait CrudableBehavior
      *
      * @param Request $request
      */
-    public function listAction()
+    public function getListResponse()
     {
         $entities = $this->getObjectsToList();
 
@@ -28,7 +28,7 @@ trait CrudableBehavior
     /**
      * Finds specific object to display.
      */
-    public function showAction($id)
+    public function getShowResponse($id)
     {
         $object = $this->getObjectToShow($id);
 
@@ -59,7 +59,7 @@ trait CrudableBehavior
     /**
      * Displays a form to create a new object.
      */
-    public function newAction()
+    public function getNewResponse()
     {
         $object = $this->createNewObject();
         $form   = $this->createNewForm($object);
@@ -73,7 +73,7 @@ trait CrudableBehavior
     /**
      * Creates a new object.
      */
-    public function createAction()
+    public function getCreateResponse()
     {
         $request = $this->getRequest();
         $object  = $this->createNewObject();
@@ -98,7 +98,7 @@ trait CrudableBehavior
     /**
      * Finds specific object to edit.
      */
-    public function editAction($id)
+    public function getEditResponse($id)
     {
         $object = $this->getObjectToEdit($id);
 
@@ -131,7 +131,7 @@ trait CrudableBehavior
     /**
      * Finds specific object to update.
      */
-    public function updateAction($id)
+    public function getUpdateResponse($id)
     {
         $object = $this->getObjectToEdit($id);
 
@@ -177,7 +177,7 @@ trait CrudableBehavior
     /**
      * Finds specific object to delete.
      */
-    public function deleteAction($id)
+    public function getDeleteResponse($id)
     {
         $object = $this->getObjectToDelete($id);
 
