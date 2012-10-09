@@ -1,0 +1,41 @@
+{
+    "name": "knplabs/controller-behaviors",
+    "description": "Trait based Symfony2 controllers",
+    "type": "library",
+    "keywords": [
+        "behaviors",
+        "doctrine2",
+        "symfony2",
+        "CRUD"
+    ],
+    "homepage": "http://knplabs.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Knplabs",
+            "homepage": "http://knplabs.com"
+        },
+        {
+            "name":     "Klein Florian",
+            "email":    "florian.klein@free.fr",
+            "homepage": "https://github.com/docteurklein"
+        },
+        {
+            "name":      "Konstantin Kudryashov",
+            "email":     "ever.zet@gmail.com",
+            "homepage":  "http://everzet.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/http-foundation": "2.*"
+    },
+    "suggest": {
+        "doctrine/orm": "2.*",
+        "doctrine/odm": "2.*"
+    },
+    "minimum-stability": "dev"
+}
