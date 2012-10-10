@@ -33,13 +33,13 @@ trait FilterableBehavior
      */
     abstract protected function getListRoute();
 
-    abstract protected function listAction();
+    abstract protected function getListResponse();
 
     /**
      * Displays a form to edit an existing User entity.
      *
      */
-    public function filterAction(Request $request)
+    public function getFilterResponse(Request $request)
     {
         $form = $this->createFilterForm();
         $form->bindRequest($request);
@@ -50,15 +50,15 @@ trait FilterableBehavior
             return $this->redirect($this->getListRoute());
         }
 
-        return $this->getInvalidFilterActionResponse($form);
+        return $this->getInvalidFilterResponse($form);
     }
 
-    public function getInvalidFilterActionResponse(Form $form)
+    public function getInvalidFilterResponse(Form $form)
     {
         return $this->listAction();
     }
 
-    public function filterResetAction()
+    public function getFilterResetResponse()
     {
         $this->setFilters(array());
 

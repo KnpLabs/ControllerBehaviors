@@ -8,7 +8,6 @@ namespace Knp\ControllerBehaviors\Crudable\Doctrine;
 trait ORMBehavior
 {
     use DoctrineBehavior;
-
     /**
      * Returns namespace prefix for crudable objects.
      *
