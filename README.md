@@ -60,7 +60,7 @@ will search for a `<Object>Type` in the `Form` folder of the bundle.
 In the examples below, it would be in `src/Acme/DemoBundle/Form/MemberType`.
 
 To modify this behavior, just override
-the [https://github.com/KnpLabs/ControllerBehaviors/blob/master/src/Knp/ControllerBehaviors/Crudable/CrudableBehavior.php#L544](default implementation) 
+the [default implementation](https://github.com/KnpLabs/ControllerBehaviors/blob/master/src/Knp/ControllerBehaviors/Crudable/CrudableBehavior.php#L544) 
 of the trait, like this:
 
 ``` php
@@ -81,7 +81,7 @@ Templates are also searched using conventions. By default it will search in the 
 `<ControllerName>` here can be contain a subfolder (think of an `Admin` subfolder for example).
 
 To modify this behavior, just override
-the [https://github.com/KnpLabs/ControllerBehaviors/blob/master/src/Knp/ControllerBehaviors/Crudable/CrudableBehavior.php#L470](default implementation) 
+the [default implementation](https://github.com/KnpLabs/ControllerBehaviors/blob/master/src/Knp/ControllerBehaviors/Crudable/CrudableBehavior.php#L470) 
 of the trait, like this:
 
 
@@ -124,7 +124,7 @@ class MemberController extends Controller
 
 ```
 
-In order to make this filter form visible in the view, you can override [https://github.com/KnpLabs/ControllerBehaviors/blob/master/src/Knp/ControllerBehaviors/Crudable/CrudableBehavior.php#L470]( default view parameters handling):
+In order to make this filter form visible in the view, you can override [default view parameters handling](https://github.com/KnpLabs/ControllerBehaviors/blob/master/src/Knp/ControllerBehaviors/Crudable/CrudableBehavior.php#L470):
 
 ``` php
 
