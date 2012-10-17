@@ -142,7 +142,7 @@ In order to make this filter form visible in the view, you can override [default
 
 ### Paginable
 
-Paginable behavior is a simple trait that uses [https://github.com/KnpLabs/KnpPaginatorBundle](Knp paginator) to paginate a resultset.
+Paginable behavior is a simple trait that uses [Knp paginator](https://github.com/KnpLabs/KnpPaginatorBundle) to paginate a resultset.
 
 
 ``` php
