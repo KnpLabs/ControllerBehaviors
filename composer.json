@@ -35,10 +35,12 @@
     },
     "require-dev": {
         "knplabs/knp-components": "dev-master",
-        "doctrine/orm": "dev-master",
-        "doctrine/mongodb-odm": "dev-master",
-        "propel/propel1": "dev-master",
-        "symfony/event-dispatcher": "dev-master"
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/orm": "*",
+        "doctrine/mongodb-odm-bundle": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/class-loader": "*",
+        "propel/propel1": "dev-master"
     },
     "suggest": {
         "knplabs/knp-paginator-bundle": "*",

@@ -3,8 +3,8 @@
 namespace Knp\ControllerBehaviors\Crudable;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Util\Inflector;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * CRUD controller behavior.
@@ -270,8 +270,8 @@ trait CrudableBehavior
      */
     protected function getBundleName()
     {
-        if ($this instanceof Controller) {
-            foreach ($this->get('kernel')->getBundles() as $bundle) {
+        if ($this instanceof ContainerAware) {
+            foreach ($this->container->get('kernel')->getBundles() as $bundle) {
                 if (false !== strpos(get_class($this), $bundle->getNamespace())) {
                     return $bundle->getName();
                 }
@@ -290,8 +290,8 @@ trait CrudableBehavior
      */
     protected function getBundleNamespace()
     {
-        if ($this instanceof Controller) {
-            return $this->get('kernel')->getBundle($this->getBundleName())->getNamespace();
+        if ($this instanceof ContainerAware) {
+            return $this->container->get('kernel')->getBundle($this->getBundleName())->getNamespace();
         }
 
         throw new \RuntimeException(

@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="Knp Controller Behaviors">
             <directory suffix=".php">tests</directory>
+            <exclude>tests/Knp/ControllerBehaviors/BaseControllerTest.php</exclude>
         </testsuite>
     </testsuites>
 </phpunit>
