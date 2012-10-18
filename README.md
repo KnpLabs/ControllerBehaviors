@@ -8,7 +8,7 @@ that adds behaviors to Symfony2 controllers.
 
 It currently handles:
 
- * [crudable](#crudable) (Doctrine2 ORM and ODM)
+ * [crudable](#crudable) (Doctrine2 ORM and ODM, Propel)
  * [filterable](#filterable)
  * [paginable](#paginable)
 
@@ -21,7 +21,8 @@ All you have to do is to define a Controller and use some traits.
 ### crudable:
 
 Crudable trait is an abstract trait used internally by ORMBehavior and ODMBehavior.  
-To use ORM persistence in your CRUD, just use ORMBehavior like below.
+ * To use Doctrine ORM persistence in your CRUD, just use ORMBehavior like below.
+ * To use Propel ORM persistence in your CRUD, just use PropelBehavior.
 
 
 ``` php

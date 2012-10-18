@@ -34,8 +34,9 @@
         "symfony/http-foundation": "2.*"
     },
     "suggest": {
-        "doctrine/orm": "2.*",
-        "doctrine/odm": "2.*"
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/mongodb-odm-bundle": "*",
+        "propel/propel-bundle": "*",
     },
     "minimum-stability": "dev"
 }
