@@ -15,13 +15,13 @@ trait BulkableBehavior
         $action = $request->get('batch_action');
 
         if (!$this->hasBulkAction($action)) {
-            $this->get('session')->setFlash('error', $this->getInvalidBulkActionFlashMessage());
+            $this->getSsession()->setFlash('error', $this->getInvalidBulkActionFlashMessage());
 
             return $this->redirect($this->getListRoute());
         }
 
         if (!$ids) {
-            $this->get('session')->setFlash('error', $this->getEmptyBulkIdsFlashMessage());
+            $this->getSession()->setFlash('error', $this->getEmptyBulkIdsFlashMessage());
 
             return $this->redirect($this->getListRoute());
         }
@@ -29,6 +29,13 @@ trait BulkableBehavior
         $bulkAction = $this->getBulkActions()[$action];
 
         return $this->$bulkAction($ids);
+    }
+
+    abstract protected function getRequest();
+
+    protected function getSession()
+    {
+        return $this->getRequest()->getSession();
     }
 
     /**
@@ -49,7 +56,7 @@ trait BulkableBehavior
         ;
 
         if ($numDeleted) {
-            $this->get('session')->setFlash('success', $this->getSuccessBulkDeleteFlashMessage());
+            $this->getSession()->setFlash('success', $this->getSuccessBulkDeleteFlashMessage());
         }
 
         return $this->redirect($this->getListRoute());

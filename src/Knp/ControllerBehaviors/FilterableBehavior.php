@@ -67,13 +67,20 @@ trait FilterableBehavior
 
     private function setFilters(array $filters)
     {
-        $this->get('session')->set(strtolower($this->getObjectName()).'-filters', $filters);
+        $this->getSession()->set(strtolower($this->getObjectName()).'-filters', $filters);
     }
 
     private function getFilters(array $defaults = array())
     {
-        return $this->get('session')->get(strtolower($this->getObjectName()).'-filters', $defaults);
+        return $this->getSession()->get(strtolower($this->getObjectName()).'-filters', $defaults);
     }
+
+    protected function getSession()
+    {
+        return $this->getRequest()->getSession();
+    }
+
+    abstract protected function getRequest();
 
     /**
      * Created new filter form

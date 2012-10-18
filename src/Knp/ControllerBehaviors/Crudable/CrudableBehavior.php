@@ -203,7 +203,7 @@ trait CrudableBehavior
      *
      * @return Request
      */
-    abstract public function getRequest();
+    abstract protected function getRequest();
 
     /**
      * Returns namespace prefix for crudable objects.
@@ -517,9 +517,6 @@ trait CrudableBehavior
      *
      * @return string
      */
-    protected function getObjectClass()
-    {
-        return sprintf('%s\\%s', $this->getObjectNamespace(), $this->getObjectName());
     }
 
     /**
