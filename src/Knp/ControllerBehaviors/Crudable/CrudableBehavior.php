@@ -517,6 +517,9 @@ trait CrudableBehavior
      *
      * @return string
      */
+    protected function getObjectClass()
+    {
+        return sprintf('%s\\%s', $this->getObjectNamespace(), $this->getObjectName());
     }
 
     /**
