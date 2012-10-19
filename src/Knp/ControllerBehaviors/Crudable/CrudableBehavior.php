@@ -5,6 +5,7 @@ namespace Knp\ControllerBehaviors\Crudable;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Util\Inflector;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * CRUD controller behavior.
@@ -20,7 +21,7 @@ trait CrudableBehavior
     {
         $entities = $this->getObjectsToList();
 
-        return $this->render($this->getListViewPath(), $this->getListViewParameters([
+        return $this->getRenderedResponse($this->getListViewPath(), $this->getListViewParameters([
             $this->getObjectPlural() => $entities,
         ]));
     }
@@ -50,7 +51,7 @@ trait CrudableBehavior
     {
         $deleteForm = $this->createDeleteForm($object);
 
-        return $this->render($this->getShowViewPath(), $this->getShowViewParameters([
+        return $this->getRenderedResponse($this->getShowViewPath(), $this->getShowViewParameters([
             $this->getObjectSingular() => $object,
             'delete_form'              => ($deleteForm) ? $deleteForm->createView() : null,
         ]));
@@ -64,7 +65,7 @@ trait CrudableBehavior
         $object = $this->createNewObject();
         $form   = $this->createNewForm($object);
 
-        return $this->render($this->getNewViewPath(), $this->getNewViewParameters([
+        return $this->getRenderedResponse($this->getNewViewPath(), $this->getNewViewParameters([
             $this->getObjectSingular() => $object,
             'form'                     => $form->createView(),
         ]));
@@ -89,7 +90,7 @@ trait CrudableBehavior
             return $this->redirect($this->getShowRoute($object));
         }
 
-        return $this->render($this->getNewViewPath(), $this->getNewViewParameters([
+        return $this->getRenderedResponse($this->getNewViewPath(), $this->getNewViewParameters([
             $this->getObjectSingular() => $object,
             'form'                     => $form->createView(),
         ]));
@@ -121,7 +122,7 @@ trait CrudableBehavior
         $editForm   = $this->createEditForm($object);
         $deleteForm = $this->createDeleteForm($object);
 
-        return $this->render($this->getEditViewPath(), $this->getEditViewParameters([
+        return $this->getRenderedResponse($this->getEditViewPath(), $this->getEditViewParameters([
             $this->getObjectSingular() => $object,
             'edit_form'                => $editForm->createView(),
             'delete_form'              => ($deleteForm) ? $deleteForm->createView() : null,
@@ -167,7 +168,7 @@ trait CrudableBehavior
             return $this->redirect($this->getEditRoute($object));
         }
 
-        return $this->render($this->getEditViewPath(), $this->getEditViewParameters([
+        return $this->getRenderedResponse($this->getEditViewPath(), $this->getEditViewParameters([
             $this->getObjectSingular() => $object,
             'edit_form'                => $editForm->createView(),
             'delete_form'              => ($deleteForm) ? $deleteForm->createView() : null,
@@ -457,7 +458,7 @@ trait CrudableBehavior
      */
     protected function createObjectNotFoundException($id)
     {
-        return $this->createNotFoundException(sprintf('Unable to find %s with %d id.',
+        throw new NotFoundHttpException(sprintf('Unable to find %s with %d id.',
             $this->getObjectName(), $id
         ));
     }
@@ -572,10 +573,10 @@ trait CrudableBehavior
      */
     protected function createDeleteForm($object)
     {
-        return $this->createFormBuilder(['id' => $object->getId()])
-            ->add('id', 'hidden')
-            ->getForm()
-        ;
+        $builder = $this->container->get('form.factory')->createBuilder(['id' => $object->getId()]);
+        $builder->add('id', 'hidden');
+
+        return $builder->getForm();
     }
 
     /**
@@ -616,5 +617,12 @@ trait CrudableBehavior
         return sprintf('%s successfully deleted',
             $this->getObjectPublicName($object)
         );
+    }
+
+    private function getRenderedResponse($template, array $parameters)
+    {
+        if ($this instanceof ContainerAware) {
+            return $this->container->get('templating')->renderResponse($template, $parameters);
+        }
     }
 }

@@ -27,20 +27,23 @@
         }
     ],
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "": "src/", "example": "." }
     },
     "require": {
         "php": ">=5.4.0",
-        "symfony/http-foundation": "2.*"
+        "symfony/http-foundation": "2.1.*"
     },
     "require-dev": {
         "knplabs/knp-components": "dev-master",
         "doctrine/doctrine-bundle": "*",
         "doctrine/orm": "*",
+        "symfony/form": "*",
+        "symfony/validator": "*",
         "doctrine/mongodb-odm-bundle": "*",
-        "symfony/framework-bundle": "*",
+        "symfony/framework-bundle": "2.1.*",
         "symfony/class-loader": "*",
-        "propel/propel1": "dev-master"
+        "propel/propel1": "dev-master",
+        "phpspec/phpspec2": "1.0.*"
     },
     "suggest": {
         "knplabs/knp-paginator-bundle": "*",

@@ -1,12 +1,15 @@
 <?php
 
-namespace Knp\ControllerBehaviors\Crudable\Doctrine;
+namespace example\Crudable\Doctrine;
+
+use Tests\Knp\ControllerBehaviors\Entity\Test;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\DependencyInjection\ContainerAware;
-
-require_once __DIR__.'/../../Entity/Test.php';
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormBuilder;
+use Knp\ControllerBehaviors\Crudable\Doctrine\ORMBehavior;
 
 class Controller extends ContainerAware
 {
@@ -19,7 +22,7 @@ class Controller extends ContainerAware
 
     public function getRequest()
     {
-        return new Request;
+        return $this->container->get('request');
     }
 
     /**
@@ -39,12 +42,17 @@ class Controller extends ContainerAware
 
     protected function getObjectNamespace()
     {
-        return 'Tests\Knp\ControllerBehaviors\Entity';
+        return 'Test';
     }
 
     protected function getObjectName()
     {
         return 'Test';
+    }
+
+    public function createFormBuilder($data = null, array $options = array())
+    {
+        return $this->container->get('form.factory')->createBuilder('form', $data, $options);
     }
 }
 
