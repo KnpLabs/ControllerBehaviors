@@ -7,19 +7,19 @@ use PHPSpec2\ObjectBehavior;
 class Controller extends ObjectBehavior
 {
     /**
-     * @param Symfony\Component\DependencyInjection\Container $container
+     * @param Symfony\Component\DependencyInjection\Container            $container
      * @param Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine $templating
-     * @param Doctrine\Bundle\DoctrineBundle\Registry $doctrine
-     * @param Doctrine\ORM\EntityRepository $repository
-     * @param Doctrine\ORM\EntityManager $entityManager
-     * @param Symfony\Component\HttpFoundation\Request $request
-     * @param Symfony\Component\HttpFoundation\Response $response
-     * @param Symfony\Component\Form\FormFactory $formFactory
-     * @param Symfony\Component\Form\FormBuilder $formBuilder
-     * @param Symfony\Component\Form\Form $form
-     * @param Symfony\Component\Form\FormView $formView
-     * @param Symfony\Component\Routing\Router $router
-     * @param stdClass $object
+     * @param Doctrine\Bundle\DoctrineBundle\Registry                    $doctrine
+     * @param Doctrine\ORM\EntityRepository                              $repository
+     * @param Doctrine\ORM\EntityManager                                 $entityManager
+     * @param Symfony\Component\HttpFoundation\Request                   $request
+     * @param Symfony\Component\HttpFoundation\Response                  $response
+     * @param Symfony\Component\Form\FormFactory                         $formFactory
+     * @param Symfony\Component\Form\FormBuilder                         $formBuilder
+     * @param Symfony\Component\Form\Form                                $form
+     * @param Symfony\Component\Form\FormView                            $formView
+     * @param Symfony\Component\Routing\Router                           $router
+     * @param stdClass                                                   $object
      **/
     function let($container, $templating, $doctrine, $repository, $entityManager, $request, $response, $formFactory, $formBuilder, $form, $formView, $router)
     {
