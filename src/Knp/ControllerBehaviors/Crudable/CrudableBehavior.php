@@ -6,12 +6,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Util\Inflector;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * CRUD controller behavior.
  */
 trait CrudableBehavior
 {
+    protected $objectFactory;
     /**
      * Lists all entities.
      *
@@ -530,9 +532,17 @@ trait CrudableBehavior
      */
     protected function createNewObject()
     {
-        $class = $this->getObjectClass();
+        return $this->getObjectFactory()->create();
+    }
 
-        return new $class();
+    private function getObjectFactory()
+    {
+        return $this->objectFactory ?: $this->objectFactory = new ObjectFactory($this->getObjectClass());
+    }
+
+    public function setObjectFactory($objectFactory)
+    {
+        $this->objectFactory = $objectFactory;
     }
 
     /**
@@ -542,14 +552,20 @@ trait CrudableBehavior
      *
      * @return FormType
      */
-    protected function createNewForm($object)
+    protected function createNewForm($object, array $options = [])
     {
-        $formClass = sprintf('%s\\Form\\%sType',
+        if (!$this instanceof ContainerAware) {
+            throw new \RuntimeException(
+                'createNewForm() method should return a Form instance. Please override it.'
+            );
+        }
+
+        $type = sprintf('%s\\Form\\%sType',
             $this->getBundleNamespace(),
             $this->getObjectName()
         );
 
-        return $this->createForm(new $formClass(), $object);
+        return $this->container->get('form.factory')->create(new $type, $object, $options);
     }
 
     /**
@@ -573,6 +589,12 @@ trait CrudableBehavior
      */
     protected function createDeleteForm($object)
     {
+        if (!$this instanceof ContainerAware) {
+            throw new \RuntimeException(
+                'createDeleteForm() method should return a Form instance. Please override it.'
+            );
+        }
+
         $builder = $this->container->get('form.factory')->createBuilder(['id' => $object->getId()]);
         $builder->add('id', 'hidden');
 
@@ -624,5 +646,21 @@ trait CrudableBehavior
         if ($this instanceof ContainerAware) {
             return $this->container->get('templating')->renderResponse($template, $parameters);
         }
+    }
+
+    protected function redirect($url, $status = 302)
+    {
+        return new RedirectResponse($url, $status);
+    }
+
+    protected function generateUrl($route, array $parameters = [], $absolute = false)
+    {
+        if (!$this instanceof ContainerAware) {
+            throw new \RuntimeException(
+                'generateUrl() method should return a url from a route name. Please override it.'
+            );
+        }
+
+        return $this->container->get('router')->generate($route, $parameters, $absolute);
     }
 }
