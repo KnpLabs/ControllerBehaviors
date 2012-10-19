@@ -11,7 +11,7 @@ class ObjectFactory
 
     public function create()
     {
-        return new $this->className(func_get_args());
+        return new $this->className;
     }
 }
 

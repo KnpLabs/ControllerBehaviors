@@ -102,12 +102,12 @@ class Controller extends ObjectBehavior
         $repository->find(1)->willReturn($object);
         $form->isValid()->willReturn(true);
 
-        $objectFactory->willReturn($object);
+        $objectFactory->create()->willReturn($object);
         $this->setObjectFactory($objectFactory);
 
         $templating->renderResponse[-1]->shouldNotBeCalled();
 
-        $entityManager->persist(ANY_ARGUMENT)->shouldBeCalled();
+        $entityManager->persist($object)->shouldBeCalled();
         $entityManager->flush()->shouldBeCalled();
 
         $response = $this->getCreateResponse(1);

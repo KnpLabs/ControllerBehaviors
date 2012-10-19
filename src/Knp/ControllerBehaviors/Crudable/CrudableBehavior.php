@@ -532,7 +532,7 @@ trait CrudableBehavior
      */
     protected function createNewObject()
     {
-        return $this->getObjectFactory()->create(func_get_args());
+        return $this->getObjectFactory()->create();
     }
 
     private function getObjectFactory()
