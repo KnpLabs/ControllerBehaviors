@@ -41,7 +41,6 @@
         "symfony/validator": "*",
         "doctrine/mongodb-odm-bundle": "*",
         "symfony/framework-bundle": "2.1.*",
-        "symfony/class-loader": "*",
         "propel/propel1": "dev-master",
         "phpspec/phpspec2": "1.0.*"
     },

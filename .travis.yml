@@ -4,7 +4,7 @@ php:
   - 5.4
 
 before_script:
-  - pecl -q install mongo && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - pecl -q install mongo
   - composer install --dev
 
 script: ./vendor/bin/phpspec run
