@@ -35,7 +35,7 @@ class Controller extends ObjectBehavior
 
         $repository->findAll()->willReturn([]);
 
-        $templating->renderResponse(':example\Crudable\Doctrine\:list.html.twig', ['tests' => []])->willReturn($response)->shouldBeCalled();
+        $templating->renderResponse(':example\Crudable\Doctrine\:list.html.twig', ['tests' => []])->willReturn($response);
 
         $this->setContainer($container);
     }
@@ -48,7 +48,7 @@ class Controller extends ObjectBehavior
     function its_getListResponse_should_render_a_list_of_Objects($templating, $repository, $response, $object)
     {
         $repository->findAll[-1]->willReturn([$object]);
-        $templating->renderResponse[-1](':example\Crudable\Doctrine\:list.html.twig', ['tests' => [$object]]);
+        $templating->renderResponse[-1](':example\Crudable\Doctrine\:list.html.twig', ['tests' => [$object]])->shouldBeCalled();
 
         $this->getListResponse()->shouldReturn($response);
     }
@@ -61,8 +61,16 @@ class Controller extends ObjectBehavior
         $templating->renderResponse[-1](':example\Crudable\Doctrine\:show.html.twig', [
             'test' => $object->getWrappedSubject(),
             'delete_form' => $formView->getWrappedSubject(),
-        ]);
+        ])->shouldBeCalled();
 
         $this->getShowResponse(1)->shouldReturn($response);
+    }
+
+    function its_getShowResponse_should_throw_Exception_when_no_resource_found($object, $templating, $repository, $response, $formView)
+    {
+        $repository->find(2)->willReturn(null);
+        $templating->renderResponse[-1]->shouldNotBeCalled();
+
+        $this->shouldThrow('Symfony\Component\HttpKernel\Exception\NotFoundHttpException')->during('getShowResponse', [2]);
     }
 }
