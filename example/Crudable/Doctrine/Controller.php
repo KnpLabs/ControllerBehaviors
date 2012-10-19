@@ -50,9 +50,9 @@ class Controller extends ContainerAware
         return 'Test';
     }
 
-    public function createFormBuilder($data = null, array $options = array())
+    protected function createNewForm($object, array $options = [])
     {
-        return $this->container->get('form.factory')->createBuilder('form', $data, $options);
+        return $this->container->get('form.factory')->create('form');
     }
 }
 
