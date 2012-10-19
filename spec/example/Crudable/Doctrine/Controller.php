@@ -33,14 +33,11 @@ class Controller extends ObjectBehavior
 
         $formFactory->createBuilder(ANY_ARGUMENTS)->willReturn($formBuilder);
         $formBuilder->getForm(ANY_ARGUMENTS)->willReturn($form);
-
         $formFactory->create(ANY_ARGUMENTS)->willReturn($form);
-
         $form->createView()->willReturn($formView);
 
         $doctrine->getRepository(ANY_ARGUMENT)->willReturn($repository);
         $doctrine->getEntityManager()->willReturn($entityManager);
-
         $repository->findAll()->willReturn([]);
 
         $templating->renderResponse(':example\Crudable\Doctrine\:list.html.twig', ['tests' => []])->willReturn($response);
@@ -144,5 +141,18 @@ class Controller extends ObjectBehavior
         ])->shouldBeCalled();
 
         $this->getEditResponse(1)->shouldReturn($response);
+    }
+
+    function its_getDeleteResponse_should_delete_object($object, $repository, $response, $form, $entityManager)
+    {
+        $object->getId()->willReturn(1);
+        $repository->find(1)->willReturn($object);
+        $form->isValid()->willReturn(true);
+
+        $entityManager->remove($object)->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
+
+        $response = $this->getDeleteResponse(1);
+        $response->shouldBeAnInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse');
     }
 }
