@@ -55,7 +55,7 @@ trait FilterableBehavior
 
     public function getInvalidFilterResponse(Form $form)
     {
-        return $this->listAction();
+        return $this->getListResponse();
     }
 
     public function getFilterResetResponse()
@@ -89,11 +89,17 @@ trait FilterableBehavior
      */
     private function createFilterForm()
     {
-        $formClass = sprintf('%s\\Form\\%sFilterType',
+        if (!$this instanceof ContainerAware) {
+            throw new \RuntimeException(
+                'createiFilterForm() method should return a Form instance. Please override it.'
+            );
+        }
+
+        $type = sprintf('%s\\Form\\%sFilterType',
             $this->getBundleNamespace(),
             $this->getObjectName()
         );
 
-        return $this->createForm(new $formClass(), $this->getFilters());
+        return $this->createForm(new $type, $this->getFilters());
     }
 }
