@@ -4,6 +4,7 @@ namespace Knp\ControllerBehaviors;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * Filtarable controller behavior.
@@ -91,7 +92,7 @@ trait FilterableBehavior
     {
         if (!$this instanceof ContainerAware) {
             throw new \RuntimeException(
-                'createiFilterForm() method should return a Form instance. Please override it.'
+                'createFilterForm() method should return a Form instance. Please override it.'
             );
         }
 

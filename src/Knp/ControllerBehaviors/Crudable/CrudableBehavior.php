@@ -653,7 +653,7 @@ trait CrudableBehavior
         return new RedirectResponse($url, $status);
     }
 
-    protected function generateUrl($route, array $parameters = [], $absolute = false)
+    public function generateUrl($route, $parameters = [], $absolute = false)
     {
         if (!$this instanceof ContainerAware) {
             throw new \RuntimeException(
