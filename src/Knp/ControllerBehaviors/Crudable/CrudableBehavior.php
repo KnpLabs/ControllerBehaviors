@@ -87,7 +87,7 @@ trait CrudableBehavior
             if ($newObject = $this->saveObject($object)) {
                 $object = $newObject;
             }
-            $this->getSession()->setFlash('success', $this->getCreateFlashMessage());
+            $this->getSession()->getFlashBag()->add('success', $this->getCreateFlashMessage());
 
             return $this->redirect($this->getShowRoute($object));
         }
@@ -163,7 +163,7 @@ trait CrudableBehavior
             if ($newObject = $this->saveObject($object)) {
                 $object = $newObject;
             }
-            $this->getSession()->setFlash('success',
+            $this->getSession()->getFlashBag()->add('success',
                 $this->getUpdateFlashMessage($object)
             );
 
@@ -258,7 +258,7 @@ trait CrudableBehavior
         $form->bindRequest($request);
         if ($form->isValid()) {
             $this->removeObject($object);
-            $this->getSession()->setFlash('success',
+            $this->getSession()->getFlashBag()->add('success',
                 $this->getDeleteFlashMessage($object)
             );
         }
