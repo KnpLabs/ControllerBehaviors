@@ -15,7 +15,7 @@ trait BulkableBehavior
         $action = $request->get('batch_action');
 
         if (!$this->hasBulkAction($action)) {
-            $this->getSsession()->getFlashBag()->add('error', $this->getInvalidBulkActionFlashMessage());
+            $this->getSession()->getFlashBag()->add('error', $this->getInvalidBulkActionFlashMessage());
 
             return $this->redirect($this->getListRoute());
         }
