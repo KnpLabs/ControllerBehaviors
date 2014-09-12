@@ -1,6 +1,7 @@
 <?php
 
 namespace Knp\ControllerBehaviors\Crudable\Doctrine;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * ORMBehavior.
@@ -25,6 +26,10 @@ trait ORMBehavior
      */
     protected function getObjectManager()
     {
-        return $this->getDoctrine()->getEntityManager();
+        if (Kernel::MINOR_VERSION < 2) {
+            return $this->getDoctrine()->getEntityManager();
+        } else {
+            return $this->getDoctrine()->getManager();
+        }
     }
 }
