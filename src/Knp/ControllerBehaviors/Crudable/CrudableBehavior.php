@@ -81,7 +81,7 @@ trait CrudableBehavior
         $request = $this->getRequest();
         $object  = $this->createNewObject();
         $form    = $this->createNewForm($object);
-        $form->bindRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             if ($newObject = $this->saveObject($object)) {
@@ -158,7 +158,7 @@ trait CrudableBehavior
         $deleteForm = $this->createDeleteForm($object);
         $request    = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->handleRequest($request);
         if ($editForm->isValid()) {
             if ($newObject = $this->saveObject($object)) {
                 $object = $newObject;
@@ -255,7 +255,7 @@ trait CrudableBehavior
         $form    = $this->createDeleteForm($object);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->handleRequest($request);
         if ($form->isValid()) {
             $this->removeObject($object);
             $this->getSession()->getFlashBag()->add('success',

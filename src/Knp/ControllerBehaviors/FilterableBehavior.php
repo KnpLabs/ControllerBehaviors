@@ -43,7 +43,7 @@ trait FilterableBehavior
     public function getFilterResponse(Request $request)
     {
         $form = $this->createFilterForm();
-        $form->bindRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $this->setFilters($form->getData());
