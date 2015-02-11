@@ -595,7 +595,9 @@ trait CrudableBehavior
             );
         }
 
-        $builder = $this->container->get('form.factory')->createBuilder('form', ['id' => $object->getId()]);
+        $builder = $this->container->get('form.factory')->createBuilder('form', [
+            'id' => $object->getId(),
+        ], ['method' => 'DELETE']);
         $builder->add('id', 'hidden');
 
         return $builder->getForm();
